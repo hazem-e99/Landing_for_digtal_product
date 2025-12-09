@@ -1,0 +1,251 @@
+/* Courses Section Styles */
+.courses-section {
+  background: #000000;
+  padding: 5rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.courses-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+/* Background Glow Effects */
+.courses-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.courses-glow-1 {
+  width: 500px;
+  height: 500px;
+  background: linear-gradient(135deg, var(--primary-cyan, #00D9D9), var(--primary-teal, #00BFB3));
+  top: -200px;
+  left: -100px;
+  animation: floatGlow 8s ease-in-out infinite;
+}
+
+.courses-glow-2 {
+  width: 400px;
+  height: 400px;
+  background: linear-gradient(135deg, var(--accent-mint, #00F5A0), var(--primary-light, #5CE1E6));
+  bottom: -150px;
+  right: -100px;
+  animation: floatGlow 10s ease-in-out infinite reverse;
+}
+
+@keyframes floatGlow {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(30px, 20px);
+  }
+}
+
+/* Section Header */
+.courses-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.header-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.diamond-icon {
+  font-size: 1.5rem;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2) rotate(10deg);
+    opacity: 0.8;
+  }
+}
+
+.courses-title {
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+}
+
+.number-highlight {
+  background: linear-gradient(135deg, var(--primary-light, #5CE1E6) 0%, var(--primary-cyan, #00D9D9) 50%, var(--accent-mint, #00F5A0) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.courses-subtitle {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  color: #a3a3a3;
+  margin-top: 0.75rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Courses Grid */
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+/* Course Card - Taller Design */
+.course-card {
+  background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(0, 217, 217, 0.25);
+  box-shadow: 0 25px 50px rgba(0, 217, 217, 0.12);
+}
+
+/* Card Image Section */
+.card-image-section {
+  position: relative;
+  width: 100%;
+  padding: 1rem 1rem 0 1rem;
+  background: transparent;
+}
+
+.card-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+  transition: transform 0.5s ease;
+}
+
+.course-card:hover .card-image {
+  transform: scale(1.02);
+}
+
+/* Free Badge - Between Image and Content */
+.free-badge-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.free-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: linear-gradient(135deg, #5CE1E6 0%, #00D9D9 50%, #00BFB3 100%);
+  color: #0a0a0a;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.6rem 1.25rem;
+  border-radius: 25px;
+  box-shadow: 0 8px 25px rgba(0, 217, 217, 0.4);
+}
+
+.badge-flames {
+  font-size: 0.9rem;
+}
+
+.badge-text {
+  font-family: inherit;
+}
+
+/* Card Content */
+.card-content {
+  padding: 1.5rem;
+  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 0.75rem 0;
+  line-height: 1.5;
+}
+
+.card-description {
+  font-size: 1.2rem;
+  color: #a1a0a0;
+  line-height: 1.7;
+  margin: 0;
+  flex: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .courses-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .courses-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .courses-section {
+    padding: 4rem 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .courses-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .courses-section {
+    padding: 3rem 1rem;
+  }
+
+  .courses-title {
+    font-size: 1.3rem;
+  }
+
+  .card-image-section {
+    aspect-ratio: 4 / 5;
+  }
+
+  .card-content {
+    padding: 1.25rem;
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+  }
+
+  .card-description {
+    font-size: 0.85rem;
+  }
+}

@@ -1,0 +1,86 @@
+/* Success Stories Section Styles */
+.success-stories-section {
+  background: #000000;
+  padding: 4rem 2rem;
+  position: relative;
+}
+
+.success-stories-container {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Badge */
+.success-stories-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(0, 217, 217, 0.08);
+  border: 1px solid rgba(0, 217, 217, 0.25);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #00D9D9;
+  margin-bottom: 24px;
+}
+
+.badge-icon {
+  font-size: 16px;
+}
+
+/* Title */
+.success-stories-title {
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0 0 16px 0;
+  line-height: 1.4;
+}
+
+.title-gradient {
+  background: linear-gradient(90deg, #00D9D9, #00F5A0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Subtitle */
+.success-stories-subtitle {
+  font-size: 15px;
+  color: #9aa3ae;
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .success-stories-section {
+    padding: 3rem 1.5rem;
+  }
+
+  .success-stories-title {
+    font-size: 22px;
+  }
+
+  .success-stories-subtitle {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .success-stories-section {
+    padding: 2.5rem 1rem;
+  }
+
+  .success-stories-title {
+    font-size: 20px;
+  }
+
+  .success-stories-badge {
+    font-size: 13px;
+    padding: 8px 16px;
+  }
+}

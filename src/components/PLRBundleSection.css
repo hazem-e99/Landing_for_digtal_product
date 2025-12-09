@@ -1,0 +1,145 @@
+/* PLR Bundle Section Styles */
+.plr-bundle-section {
+  background: #f5f5f5;
+  padding: 5rem 2rem;
+  position: relative;
+}
+
+.plr-bundle-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Section Header */
+.plr-bundle-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.plr-bundle-title {
+  font-size: clamp(24px, 4vw, 38px);
+  font-weight: 800;
+  color: #1a1a2e;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.rocket-icon {
+  font-size: 1.2em;
+}
+
+.plr-bundle-description {
+  font-size: clamp(14px, 1.8vw, 16px);
+  color: #4b5563;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.highlight-text {
+  color: #00BFB3;
+  font-weight: 700;
+}
+
+/* Bundles Grid */
+.bundles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* Bundle Card */
+.bundle-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bundle-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 217, 217, 0.15);
+}
+
+/* Bundle Image */
+.bundle-image-wrapper {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.bundle-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.bundle-card:hover .bundle-image {
+  transform: scale(1.02);
+}
+
+/* Bundle Badge */
+.bundle-badge-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.bundle-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #00D9D9 0%, #00F5A0 100%);
+  color: #0a0a0a;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 28px;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(0, 217, 217, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .bundles-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .plr-bundle-section {
+    padding: 4rem 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .bundles-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 350px;
+    margin: 0 auto;
+  }
+
+  .plr-bundle-section {
+    padding: 3rem 1rem;
+  }
+
+  .plr-bundle-title {
+    font-size: 22px;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .plr-bundle-description {
+    font-size: 14px;
+  }
+
+  .plr-bundle-description br {
+    display: none;
+  }
+}

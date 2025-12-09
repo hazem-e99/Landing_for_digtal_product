@@ -1,0 +1,261 @@
+/* Pricing Section Styles */
+.pricing-section {
+  background: #000000;
+  padding: 5rem 2rem;
+  position: relative;
+}
+
+.pricing-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: stretch;
+}
+
+/* Pricing Features Card */
+.pricing-features-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  border: 1px solid rgba(0, 217, 217, 0.3);
+  border-radius: 24px;
+  padding: 40px;
+}
+
+.pricing-features-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.pricing-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.pricing-feature-check {
+  color: #00D9D9;
+  font-size: 20px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.pricing-feature-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pricing-feature-text {
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.pricing-feature-subtext {
+  color: #9aa3ae;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* Pricing Card */
+.pricing-card {
+  background: #0a0a0a;
+  border: 1px solid rgba(0, 217, 217, 0.3);
+  border-radius: 22px;
+  padding: 28px;
+  text-align: center;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-original-price {
+  font-weight: 700;
+  color: #d1d5db;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.pricing-strikethrough {
+  color: #00D9D9;
+  text-decoration: line-through;
+  font-weight: 600;
+}
+
+.pricing-current-price {
+  font-size: clamp(64px, 12vw, 120px);
+  font-weight: 900;
+  background: linear-gradient(90deg, #00D9D9, #00F5A0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin: 6px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.pricing-offer-text {
+  font-size: 15px;
+  font-weight: 700;
+  color: #d1d5db;
+  margin-bottom: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Pricing CTA Button */
+.pricing-cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 24px;
+  min-width: 260px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #5CE1E6, #00D9D9, #00BFB3);
+  color: #0a0a0a;
+  font-weight: 900;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: 0.25s;
+  box-shadow: 0 8px 25px rgba(0, 217, 217, 0.3);
+  text-decoration: none;
+  position: relative;
+  z-index: 1;
+}
+
+.pricing-cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(0, 217, 217, 0.4);
+}
+
+.pricing-cta-icon {
+  font-size: 18px;
+}
+
+/* Pricing Payment Info */
+.pricing-payment-info {
+  display: block;
+  margin-top: 12px;
+  font-size: 14px;
+  color: #d1d5db;
+  font-weight: 400;
+  position: relative;
+  z-index: 1;
+}
+
+/* Pricing Trust Badges */
+.pricing-trust-badges {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 18px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.pricing-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.pricing-badge-icon {
+  font-size: 16px;
+}
+
+/* Pricing Timer Box */
+.pricing-timer-box {
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 16px;
+  background: linear-gradient(90deg, rgba(0, 217, 217, 0.1), rgba(0, 245, 160, 0.1));
+  border: 1px solid rgba(0, 217, 217, 0.3);
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+}
+
+.pricing-timer-icon {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.pricing-timer-display {
+  font-size: 32px;
+  font-weight: 900;
+  color: #ffffff;
+  font-family: inherit;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.pricing-timer-text {
+  font-size: 14px;
+  color: #d1d5db;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .pricing-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .pricing-section {
+    padding: 4rem 1.5rem;
+  }
+
+  .pricing-features-card,
+  .pricing-card {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .pricing-section {
+    padding: 3rem 1rem;
+  }
+
+  .pricing-features-card,
+  .pricing-card {
+    padding: 24px;
+  }
+
+  .pricing-feature-text {
+    font-size: 15px;
+  }
+
+  .pricing-cta-button {
+    font-size: 16px;
+    padding: 16px 36px;
+  }
+
+  .pricing-trust-badges {
+    gap: 16px;
+  }
+
+  .pricing-badge {
+    font-size: 12px;
+  }
+
+  .pricing-timer-display {
+    font-size: 28px;
+  }
+}

@@ -1,0 +1,36 @@
+/* Prompt Image Section Styles */
+.prompt-image-section {
+  background: #000000;
+  padding: 3rem 2rem;
+  position: relative;
+}
+
+.prompt-image-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.prompt-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .prompt-image-section {
+    padding: 2rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .prompt-image-section {
+    padding: 1.5rem 1rem;
+  }
+
+  .prompt-image {
+    border-radius: 12px;
+  }
+}
