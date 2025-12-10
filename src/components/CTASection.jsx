@@ -7,7 +7,7 @@ const CTASection = () => {
         {/* Main Heading */}
         <h2 className="cta-heading">
           <span className="cta-rocket">🚀</span>
-          فقط بـ <span className="cta-gradient">19 دولارات</span> تغيّر مستقبلك!
+          فقط بـ <span className="cta-gradient">450 جنيه</span> تغيّر مستقبلك!
         </h2>
 
         {/* Description */}
@@ -23,10 +23,10 @@ const CTASection = () => {
 
         {/* CTA Button */}
         <div className="cta-button-wrapper">
-          <button className="cta-main-button">
+          <a href="https://wa.me/201065453966" target="_blank" rel="noopener noreferrer" className="cta-main-button">
             <span className="button-fires">🔥🔥</span>
             احصل على الحزمة الآن
-          </button>
+          </a>
         </div>
       </div>
     </section>

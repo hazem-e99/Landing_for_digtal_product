@@ -37,10 +37,10 @@ const HeroSection = () => {
         </p>
 
         {/* CTA Button */}
-        <button className="hero-cta">
+        <a href="https://wa.me/201065453966" target="_blank" rel="noopener noreferrer" className="hero-cta">
           <span className="hero-cta-icon">🔥</span>
           <span className="hero-cta-text">احصل على الحزمة الآن</span>
-        </button>
+        </a>
 
         {/* Features */}
         <div className="hero-features">

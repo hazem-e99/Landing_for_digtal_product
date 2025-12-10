@@ -3,9 +3,9 @@ import './PricingSection.css';
 
 const PricingSection = () => {
   const [timeLeft, setTimeLeft] = useState({
-    hours: 0,
-    minutes: 5,
-    seconds: 58,
+    hours: 25,
+    minutes: 0,
+    seconds: 0,
   });
 
   useEffect(() => {
@@ -45,19 +45,19 @@ const PricingSection = () => {
         {/* Pricing Card */}
         <div className="pricing-card">
           <div className="pricing-original-price">
-            السعر الأصلي <span className="pricing-strikethrough">$997</span>
+            السعر الأصلي <span className="pricing-strikethrough">1000 جنيه</span>
           </div>
           
           <div className="pricing-current-price">
-            19 دولار
+            450 جنيه
           </div>
           
-          <div className="pricing-offer-text">اليوم فقط — عرض خاص</div>
+          <div className="pricing-offer-text">اليوم فقط — عرض خاص لمدة ٢٤ ساعة</div>
           
-          <button className="pricing-cta-button">
+          <a href="https://wa.me/201065453966" target="_blank" rel="noopener noreferrer" className="pricing-cta-button">
             <span className="pricing-cta-icon">🔥</span>
             احصل على الحزمة الآن
-          </button>
+          </a>
           
           <div className="pricing-payment-info">
             تحميل رقمي فوري • دفعة واحدة

@@ -2,12 +2,10 @@ import HeroSection from './components/HeroSection';
 import CoursesSection from './components/CoursesSection';
 import SellChannelsSection from './components/SellChannelsSection';
 import ProductsSection from './components/ProductsSection';
-import PLRBundleSection from './components/PLRBundleSection';
 import PricingSection from './components/PricingSection';
 import DownloadSection from './components/DownloadSection';
 import OffersSection from './components/OffersSection';
 import VideoSection from './components/VideoSection';
-import SuccessStoriesSection from './components/SuccessStoriesSection';
 import CTASection from './components/CTASection';
 import TestimonialsSection from './components/TestimonialsSection';
 import WhyDifferentSection from './components/WhyDifferentSection';
@@ -27,8 +25,6 @@ function App() {
       <div className="section-divider"></div>
       <ProductsSection />
       <div className="section-divider"></div>
-      <PLRBundleSection />
-      <div className="section-divider"></div>
       <PricingSection />
       <div className="section-divider"></div>
       <DownloadSection />
@@ -36,8 +32,6 @@ function App() {
       <OffersSection />
       <div className="section-divider"></div>
       <VideoSection />
-      <div className="section-divider"></div>
-      <SuccessStoriesSection />
       <div className="section-divider"></div>
       <CTASection />
       <div className="section-divider"></div>

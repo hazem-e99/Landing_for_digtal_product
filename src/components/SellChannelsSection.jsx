@@ -60,9 +60,9 @@ const SellChannelsSection = () => {
             <span className="cta-rocket">🚀</span>
             ابدأ الآن واستثمر في مستقبلك الرقمي!
           </p>
-          <button className="sell-cta-button">
+          <a href="https://wa.me/201065453966" target="_blank" rel="noopener noreferrer" className="sell-cta-button">
             نعم أريد هذا العرض الآن
-          </button>
+          </a>
         </div>
       </div>
     </section>

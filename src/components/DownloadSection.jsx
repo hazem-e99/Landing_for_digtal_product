@@ -64,9 +64,9 @@ const DownloadSection = () => {
           </p>
 
           {/* CTA Button */}
-          <button className="download-cta-button">
+          <a href="https://wa.me/201065453966" target="_blank" rel="noopener noreferrer" className="download-cta-button">
             الانتقال إلى صفحة التحميلات
-          </button>
+          </a>
         </div>
       </div>
     </section>
