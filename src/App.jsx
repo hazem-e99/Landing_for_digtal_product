@@ -10,7 +10,7 @@ import CTASection from './components/CTASection';
 import TestimonialsSection from './components/TestimonialsSection';
 import WhyDifferentSection from './components/WhyDifferentSection';
 import ResultsVideoSection from './components/ResultsVideoSection';
-import PromptImageSection from './components/PromptImageSection';
+
 import FAQSection from './components/FAQSection';
 import Footer from './components/Footer';
 
@@ -40,8 +40,6 @@ function App() {
       <WhyDifferentSection />
       <div className="section-divider"></div>
       <ResultsVideoSection />
-      <div className="section-divider"></div>
-      <PromptImageSection />
       <div className="section-divider"></div>
       <FAQSection />
       <Footer />

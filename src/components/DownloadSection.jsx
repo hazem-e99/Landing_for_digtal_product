@@ -13,9 +13,7 @@ const DownloadSection = () => {
 
           {/* Description */}
           <p className="download-description">
-            بمجرد إتمام عملية الدفع بنجاح، سيتم تحويلك مباشرة إلى حسابك داخل
-            الموقع، وستجد جميع المنتجات التي اشتريتها جاهزة للتحميل فورًا بدون أي
-            انتظار.
+            بمجرد إتمام عملية الدفع بنجاح من خلال التواصل معنا عبر الواتساب، سيتم ارسال كل الملفات التي تحتوي علي المنتجات الرقمية + الكورسات، وستجد جميع المنتجات التي اشتريتها جاهزة للتحميل فورًا بدون أي انتظار.
           </p>
 
           {/* Features List */}
@@ -30,7 +28,7 @@ const DownloadSection = () => {
             </li>
             <li className="download-feature-item">
               <span className="download-bullet">◆</span>
-              جميع الملفات ستكون متاحة فورًا داخل قسم "<span className="download-highlight">حسابي → التحميلات</span>"
+              جميع الملفات ستكون متاحة فورًا بعد الدفع
             </li>
             <li className="download-feature-item">
               <span className="download-bullet">◆</span>
@@ -41,17 +39,17 @@ const DownloadSection = () => {
           {/* Highlighted Tags */}
           <div className="download-tags">
             <span className="download-tag">
-              <span className="download-tag-check">✔</span>
+              <span className="download-tag-check">✔️</span>
               سهولة
             </span>
             <span className="download-tag-separator">-</span>
             <span className="download-tag">
-              <span className="download-tag-check">✔</span>
+              <span className="download-tag-check">✔️</span>
               سرعة
             </span>
             <span className="download-tag-separator">-</span>
             <span className="download-tag">
-              <span className="download-tag-check">✔</span>
+              <span className="download-tag-check">✔️</span>
               وصول فوري لجميع المنتجات بعد الدفع
             </span>
           </div>
@@ -60,12 +58,12 @@ const DownloadSection = () => {
           <p className="download-final-text">
             بعد إتمام الشراء ستجد جميع روابط التحميل الخاصة بكل <span className="download-highlight">منتج قمت بشرائه</span>
             <br />
-            داخل صفحة التحميلات الخاصة بك. اضغط على الزر التالي للانتقال مباشرة:
+            داخل الملفات التي سيتم ارسالها لك. اضغط على زر الواتساب واكمل عملية الشراء الأن
           </p>
 
           {/* CTA Button */}
           <a href="https://wa.me/201065453966" target="_blank" rel="noopener noreferrer" className="download-cta-button">
-            الانتقال إلى صفحة التحميلات
+            الشراء الأن من خلال واتساب
           </a>
         </div>
       </div>
