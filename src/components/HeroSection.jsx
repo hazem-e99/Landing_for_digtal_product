@@ -19,9 +19,7 @@ const HeroSection = () => {
 
         {/* Main Heading */}
         <h1 className="hero-heading">
-          <span className="heading-gradient">ابدأ</span> مشروعك الرقمي مع أكثر من مليون
-          <br />
-          <span className="heading-gradient">منتج</span> جاهز للبيع
+          ابدا مشروعك الرقمي ب <span className="heading-gradient price-highlight">٤٥٠</span> ج بس !!
         </h1>
 
         {/* Subtitle */}
@@ -37,7 +35,7 @@ const HeroSection = () => {
         </p>
 
         {/* CTA Button */}
-        <a href="https://wa.me/201065453966" target="_blank" rel="noopener noreferrer" className="hero-cta">
+        <a href="#pricing" className="hero-cta">
           <span className="hero-cta-icon">🔥</span>
           <span className="hero-cta-text">احصل على الحزمة الآن</span>
         </a>

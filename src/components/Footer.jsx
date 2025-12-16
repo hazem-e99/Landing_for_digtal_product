@@ -14,7 +14,7 @@ const Footer = () => {
           Store-X
         </div>
         </div>
-      </div>
+      </div>ew
     </footer>
   );
 };

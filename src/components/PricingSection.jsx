@@ -40,7 +40,7 @@ const PricingSection = () => {
   ];
 
   return (
-    <section className="pricing-section" dir="rtl">
+    <section className="pricing-section" dir="rtl" id="pricing">
       <div className="pricing-container">
         {/* Pricing Card */}
         <div className="pricing-card">
