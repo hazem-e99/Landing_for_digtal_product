@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import './PricingSection.css';
 
 // رابط Stripe Payment Link
-const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/4gM4gA2pY3Up0yLaQ0dAk23";
+// const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/4gM4gA2pY3Up0yLaQ0dAk23";
+const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/fZubJ2fcKbmR3KX5vGdAk24";
 
 const PricingSection = () => {
   const [timeLeft, setTimeLeft] = useState({
