@@ -1,9 +1,60 @@
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import './SuccessPage.css';
 
 // رابط تحميل المنتج
 const PRODUCT_DOWNLOAD_LINK = "https://drive.google.com/drive/folders/1xaz0weZqnVqn_btBwk8UDQLhcGr1ZpgG";
 
 const SuccessPage = () => {
+  const [searchParams] = useSearchParams();
+  const [isValid, setIsValid] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // التحقق من وجود session_id من Stripe
+    const sessionId = searchParams.get('session_id');
+    
+    // لو في session_id، يعني العميل جاي من Stripe بعد الدفع
+    if (sessionId) {
+      setIsValid(true);
+      // حفظ في localStorage عشان لو رجع للصفحة يقدر يحمل
+      localStorage.setItem('payment_verified', sessionId);
+    } else {
+      // لو مفيش session_id، نتحقق من localStorage
+      const savedSession = localStorage.getItem('payment_verified');
+      if (savedSession) {
+        setIsValid(true);
+      }
+    }
+    setIsLoading(false);
+  }, [searchParams]);
+
+  if (isLoading) {
+    return (
+      <div className="success-page" dir="rtl">
+        <div className="success-container">
+          <p style={{ color: '#fff' }}>جاري التحقق...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!isValid) {
+    return (
+      <div className="success-page" dir="rtl">
+        <div className="success-container">
+          <h1 className="success-title" style={{ color: '#ef4444' }}>⚠️ غير مصرح</h1>
+          <p className="success-message">
+            يجب إتمام عملية الدفع أولاً للوصول لهذه الصفحة.
+          </p>
+          <a href="/#pricing" className="success-home-button">
+            اذهب للشراء
+          </a>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="success-page" dir="rtl">
       <div className="success-container">
@@ -34,7 +85,7 @@ const SuccessPage = () => {
         </a>
         
         <div className="success-info-box">
-          <div className="success-info-icon">�</div>
+          <div className="success-info-icon">💡</div>
           <div className="success-info-text">
             <strong>نصيحة</strong>
             <span>احفظ هذه الصفحة أو الرابط للرجوع إليه لاحقاً</span>
