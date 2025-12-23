@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import './PricingSection.css';
 
+// رابط Stripe Payment Link
+const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/4gM4gA2pY3Up0yLaQ0dAk23";
+
 const PricingSection = () => {
   const [timeLeft, setTimeLeft] = useState({
     hours: 25,
@@ -54,7 +57,7 @@ const PricingSection = () => {
           
           <div className="pricing-offer-text">اليوم فقط — عرض خاص لمدة ٢٤ ساعة</div>
           
-          <a href="https://wa.me/201065453966" target="_blank" rel="noopener noreferrer" className="pricing-cta-button">
+          <a href={STRIPE_PAYMENT_LINK} target="_blank" rel="noopener noreferrer" className="pricing-cta-button">
             <span className="pricing-cta-icon">🔥</span>
             احصل على الحزمة الآن
           </a>
