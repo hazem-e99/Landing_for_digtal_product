@@ -111,7 +111,7 @@ const SuccessPage = () => {
         </div>
         
         <div className="success-support">
-          <p>هل تواجه مشكلة في التحميل؟ <a href="https://m.me/storex2026" target="_blank" rel="noopener noreferrer">تواصل معنا</a></p>
+          <p>هل تواجه مشكلة في التحميل؟ <a href="https://wa.me/201065453966" target="_blank" rel="noopener noreferrer">تواصل معنا</a></p>
         </div>
         
         <a href="/" className="success-home-button">

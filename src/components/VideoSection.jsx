@@ -40,7 +40,7 @@ const VideoSection = () => {
 
         {/* CTA Button */}
         <div className="video-cta-wrapper">
-          <a href="https://m.me/storex2026" target="_blank" rel="noopener noreferrer" className="video-cta-button">
+          <a href="https://wa.me/201065453966" target="_blank" rel="noopener noreferrer" className="video-cta-button">
             <span className="cta-link-icon">🔗</span>
             احصل على الحزمة الآن
           </a>

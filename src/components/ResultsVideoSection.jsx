@@ -36,7 +36,7 @@ const ResultsVideoSection = () => {
 
         {/* CTA Button */}
         <div className="results-video-cta">
-          <a href="https://m.me/storex2026" target="_blank" rel="noopener noreferrer" className="results-cta-button">
+          <a href="https://wa.me/201065453966" target="_blank" rel="noopener noreferrer" className="results-cta-button">
             <span className="cta-icon">💎</span>
             ابدأ مشروعك الرقمي الآن
           </a>
