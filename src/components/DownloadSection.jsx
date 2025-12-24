@@ -60,7 +60,7 @@ const DownloadSection = () => {
           </p>
 
           {/* CTA Button */}
-          <a href="https://buy.stripe.com/bJecN62pY9eJ4P1bU4dAk26" target="_blank" rel="noopener noreferrer" className="download-cta-button">
+          <a href="https://buy.stripe.com/fZucN62pY2QlepB8HSdAk27" target="_blank" rel="noopener noreferrer" className="download-cta-button">
             انتقل إلى صفحة التحميلات
           </a>
         </div>

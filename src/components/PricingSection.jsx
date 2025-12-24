@@ -3,7 +3,7 @@ import './PricingSection.css';
 
 // رابط Stripe Payment Link
 // const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/4gM4gA2pY3Up0yLaQ0dAk23";
-const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/bJecN62pY9eJ4P1bU4dAk26";
+const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/fZucN62pY2QlepB8HSdAk27";
 
 const PricingSection = () => {
   const [timeLeft, setTimeLeft] = useState({
