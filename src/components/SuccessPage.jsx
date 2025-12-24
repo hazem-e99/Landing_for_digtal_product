@@ -90,23 +90,24 @@ const SuccessPage = () => {
 
         {/* Downloads Section */}
         <div className="downloads-section">
-          <h2>📥 ملفاتك جاهزة للتحميل</h2>
+          <h2 className="downloads-title">
+            <span className="downloads-icon">📥</span>
+            ملفاتك جاهزة للتحميل
+          </h2>
+          
           <div className="downloads-grid">
             {DOWNLOAD_FILES.map((file, index) => (
               <a 
                 key={index}
                 href={`/products/${file.filename}`}
                 download={file.filename}
-                className={`download-card ${file.color}`}
+                className={`download-card-success ${file.color}`}
               >
-                <div className="card-icon">{file.icon}</div>
-                <div className="card-content">
-                  <h3>{file.name}</h3>
-                  <p>{file.description}</p>
-                </div>
-                <div className="card-download">
-                  <span className="download-btn">تحميل</span>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <span className="card-icon">{file.icon}</span>
+                <span className="card-title">{file.name}</span>
+                <div className="card-download-btn">
+                  <span>تحميل</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                     <polyline points="7 10 12 15 17 10"/>
                     <line x1="12" y1="15" x2="12" y2="3"/>
