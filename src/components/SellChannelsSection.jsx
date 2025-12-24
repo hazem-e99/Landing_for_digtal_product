@@ -60,7 +60,7 @@ const SellChannelsSection = () => {
             <span className="cta-rocket">🚀</span>
             ابدأ الآن واستثمر في مستقبلك الرقمي!
           </p>
-          <a href="https://buy.stripe.com/fZucN62pY2QlepB8HSdAk27" target="_blank" rel="noopener noreferrer" className="sell-cta-button">
+          <a href="https://buy.stripe.com/eVqaEY0hQ8aF3KXcY8dAk29" target="_blank" rel="noopener noreferrer" className="sell-cta-button">
             نعم أريد هذا العرض الآن
           </a>
         </div>

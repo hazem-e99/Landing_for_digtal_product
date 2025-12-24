@@ -40,7 +40,7 @@ const VideoSection = () => {
 
         {/* CTA Button */}
         <div className="video-cta-wrapper">
-          <a href="https://buy.stripe.com/fZucN62pY2QlepB8HSdAk27" target="_blank" rel="noopener noreferrer" className="video-cta-button">
+          <a href="https://buy.stripe.com/eVqaEY0hQ8aF3KXcY8dAk29" target="_blank" rel="noopener noreferrer" className="video-cta-button">
             <span className="cta-link-icon">🔗</span>
             احصل على الحزمة الآن
           </a>
