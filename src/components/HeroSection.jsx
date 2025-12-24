@@ -19,7 +19,7 @@ const HeroSection = () => {
 
         {/* Main Heading */}
         <h1 className="hero-heading">
-          ابدا مشروعك الرقمي ب <span className="heading-gradient price-highlight">٤٥٠</span> ج بس !!
+          ابدا مشروعك الرقمي ب <span className="heading-gradient price-highlight">14</span> دولار بس !!
         </h1>
 
         {/* Subtitle */}

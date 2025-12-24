@@ -49,11 +49,11 @@ const PricingSection = () => {
         {/* Pricing Card */}
         <div className="pricing-card">
           <div className="pricing-original-price">
-            السعر الأصلي <span className="pricing-strikethrough">1000 جنيه</span>
+            السعر الأصلي <span className="pricing-strikethrough">100 دولار</span>
           </div>
           
           <div className="pricing-current-price">
-            450 جنيه
+            14 دولار
           </div>
           
           <div className="pricing-offer-text">اليوم فقط — عرض خاص لمدة ٢٤ ساعة</div>

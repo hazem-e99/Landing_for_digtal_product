@@ -25,22 +25,22 @@ const WhyDifferentSection = () => {
             </p>
           </div>
 
-          {/* Card 2 - مرافقة عبر الواتساب */}
+          {/* Card 2 - مرافقة عبر الماسنجر */}
           <div className="why-different-card">
             <div className="card-header">
               <span className="card-icon">💬</span>
-              <h3 className="card-title">مرافقة عبر الواتساب</h3>
+              <h3 className="card-title">مرافقة عبر الماسنجر</h3>
             </div>
             <p className="card-description">
-              تواصل معنا مباشرة عبر الواتساب لأي سؤال أو استفسار.
+              تواصل معنا مباشرة عبر الماسنجر لأي سؤال أو استفسار.
             </p>
           </div>
         </div>
 
         {/* CTA Button */}
         <div className="why-different-cta">
-          <a href="https://wa.me/201065453966" target="_blank" rel="noopener noreferrer" className="messenger-button">
-            تواصل معنا عبر الواتساب
+          <a href="https://m.me/storex2026" target="_blank" rel="noopener noreferrer" className="messenger-button">
+            تواصل معنا عبر الماسنجر
             <span className="button-icon">⚡</span>
           </a>
         </div>
