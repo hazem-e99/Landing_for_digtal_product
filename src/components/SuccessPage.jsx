@@ -38,6 +38,14 @@ const SuccessPage = () => {
     if (sessionId) {
       setIsValid(true);
       localStorage.setItem('payment_verified', sessionId);
+      
+      // Track Purchase event with Meta Pixel
+      if (typeof window.fbq === 'function') {
+        window.fbq('track', 'Purchase', {
+          currency: 'USD',
+          value: 14.00
+        });
+      }
     } else {
       const savedSession = localStorage.getItem('payment_verified');
       if (savedSession) {

@@ -20,8 +20,6 @@
   width: 520px;
   flex-direction: column;
   box-shadow: 0 0 60px rgba(0, 217, 217, 0.15), 0 0 100px rgba(0, 245, 160, 0.1);
-  position: relative;
-  z-index: 1;
 }
 
 /* Header */
@@ -142,10 +140,6 @@
   cursor: pointer;
   transition: 0.25s;
   box-shadow: 0 6px 24px rgba(0, 217, 217, 0.3);
-  position: relative;
-  z-index: 10;
-  pointer-events: auto;
-  text-decoration: none;
 }
 
 .download-cta-button:hover {
