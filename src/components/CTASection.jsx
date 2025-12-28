@@ -1,4 +1,5 @@
 import './CTASection.css';
+import { trackInitiateCheckout } from '../utils/tracking';
 
 const CTASection = () => {
   return (
@@ -23,7 +24,7 @@ const CTASection = () => {
 
         {/* CTA Button */}
         <div className="cta-button-wrapper">
-          <a href="https://buy.stripe.com/eVqaEY0hQ8aF3KXcY8dAk29" target="_blank" rel="noopener noreferrer" className="cta-main-button">
+          <a href="https://buy.stripe.com/eVqaEY0hQ8aF3KXcY8dAk29" target="_blank" rel="noopener noreferrer" className="cta-main-button" onClick={trackInitiateCheckout}>
             <span className="button-fires">🔥🔥</span>
             احصل على الحزمة الآن
           </a>

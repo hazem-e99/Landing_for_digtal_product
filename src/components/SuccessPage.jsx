@@ -37,15 +37,43 @@ const SuccessPage = () => {
     
     if (sessionId) {
       setIsValid(true);
-      localStorage.setItem('payment_verified', sessionId);
       
-      // Track Purchase event with Meta Pixel
-      if (typeof window.fbq === 'function') {
-        window.fbq('track', 'Purchase', {
-          currency: 'USD',
-          value: 14.00
-        });
+      // Check if we already tracked this purchase to avoid duplicates
+      const trackedSessions = JSON.parse(localStorage.getItem('tracked_purchases') || '[]');
+      const alreadyTracked = trackedSessions.includes(sessionId);
+      
+      if (!alreadyTracked) {
+        // Track Purchase event with Meta Pixel
+        if (typeof window.fbq === 'function') {
+          window.fbq('track', 'Purchase', {
+            currency: 'USD',
+            value: 14.00,
+            content_type: 'product',
+            content_name: 'Digital Products Bundle'
+          });
+          console.log('✅ Meta Pixel: Purchase tracked');
+        }
+        
+        // Track Purchase event with TikTok Pixel
+        if (typeof window.ttq !== 'undefined') {
+          window.ttq.track('CompletePayment', {
+            content_type: 'product',
+            content_id: 'digital_bundle',
+            content_name: 'Digital Products Bundle',
+            quantity: 1,
+            price: 14.00,
+            value: 14.00,
+            currency: 'USD'
+          });
+          console.log('✅ TikTok Pixel: Purchase tracked');
+        }
+        
+        // Save session to prevent duplicate tracking
+        trackedSessions.push(sessionId);
+        localStorage.setItem('tracked_purchases', JSON.stringify(trackedSessions));
       }
+      
+      localStorage.setItem('payment_verified', sessionId);
     } else {
       const savedSession = localStorage.getItem('payment_verified');
       if (savedSession) {

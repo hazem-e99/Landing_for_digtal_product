@@ -1,4 +1,5 @@
 import './SellChannelsSection.css';
+import { trackInitiateCheckout } from '../utils/tracking';
 
 const SellChannelsSection = () => {
   const channels = [
@@ -60,7 +61,7 @@ const SellChannelsSection = () => {
             <span className="cta-rocket">🚀</span>
             ابدأ الآن واستثمر في مستقبلك الرقمي!
           </p>
-          <a href="https://buy.stripe.com/eVqaEY0hQ8aF3KXcY8dAk29" target="_blank" rel="noopener noreferrer" className="sell-cta-button">
+          <a href="https://buy.stripe.com/eVqaEY0hQ8aF3KXcY8dAk29" target="_blank" rel="noopener noreferrer" className="sell-cta-button" onClick={trackInitiateCheckout}>
             نعم أريد هذا العرض الآن
           </a>
         </div>
