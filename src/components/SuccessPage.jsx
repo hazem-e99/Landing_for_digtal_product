@@ -31,57 +31,84 @@ const SuccessPage = () => {
   const [searchParams] = useSearchParams();
   const [isValid, setIsValid] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [showDownloads, setShowDownloads] = useState(false);
+  const [sessionId, setSessionId] = useState(null);
 
   useEffect(() => {
-    const sessionId = searchParams.get('session_id');
+    const urlSessionId = searchParams.get('session_id');
     
-    if (sessionId) {
+    if (urlSessionId) {
       setIsValid(true);
+      setSessionId(urlSessionId);
+      localStorage.setItem('payment_verified', urlSessionId);
       
-      // Check if we already tracked this purchase to avoid duplicates
-      const trackedSessions = JSON.parse(localStorage.getItem('tracked_purchases') || '[]');
-      const alreadyTracked = trackedSessions.includes(sessionId);
-      
-      if (!alreadyTracked) {
-        // Track Purchase event with Meta Pixel
-        if (typeof window.fbq === 'function') {
-          window.fbq('track', 'Purchase', {
-            currency: 'USD',
-            value: 14.00,
-            content_type: 'product',
-            content_name: 'Digital Products Bundle'
-          });
-          console.log('✅ Meta Pixel: Purchase tracked');
-        }
-        
-        // Track Purchase event with TikTok Pixel
-        if (typeof window.ttq !== 'undefined') {
-          window.ttq.track('CompletePayment', {
-            content_type: 'product',
-            content_id: 'digital_bundle',
-            content_name: 'Digital Products Bundle',
-            quantity: 1,
-            price: 14.00,
-            value: 14.00,
-            currency: 'USD'
-          });
-          console.log('✅ TikTok Pixel: Purchase tracked');
-        }
-        
-        // Save session to prevent duplicate tracking
-        trackedSessions.push(sessionId);
-        localStorage.setItem('tracked_purchases', JSON.stringify(trackedSessions));
+      // Check if user already claimed downloads (show downloads directly)
+      const claimedSessions = JSON.parse(localStorage.getItem('claimed_downloads') || '[]');
+      if (claimedSessions.includes(urlSessionId)) {
+        setShowDownloads(true);
       }
-      
-      localStorage.setItem('payment_verified', sessionId);
     } else {
       const savedSession = localStorage.getItem('payment_verified');
       if (savedSession) {
         setIsValid(true);
+        setSessionId(savedSession);
+        // Check if already claimed
+        const claimedSessions = JSON.parse(localStorage.getItem('claimed_downloads') || '[]');
+        if (claimedSessions.includes(savedSession)) {
+          setShowDownloads(true);
+        }
       }
     }
     setIsLoading(false);
   }, [searchParams]);
+
+  // Function to handle claim button click - THIS IS WHERE TRACKING HAPPENS
+  const handleClaimProducts = () => {
+    // Check if we already tracked this purchase to avoid duplicates
+    const trackedSessions = JSON.parse(localStorage.getItem('tracked_purchases') || '[]');
+    const alreadyTracked = sessionId && trackedSessions.includes(sessionId);
+    
+    if (!alreadyTracked && sessionId) {
+      // Track Purchase event with Meta Pixel
+      if (typeof window.fbq === 'function') {
+        window.fbq('track', 'Purchase', {
+          currency: 'USD',
+          value: 14.00,
+          content_type: 'product',
+          content_name: 'Digital Products Bundle'
+        });
+        console.log('✅ Meta Pixel: Purchase tracked');
+      }
+      
+      // Track Purchase event with TikTok Pixel
+      if (typeof window.ttq !== 'undefined') {
+        window.ttq.track('CompletePayment', {
+          content_type: 'product',
+          content_id: 'digital_bundle',
+          content_name: 'Digital Products Bundle',
+          quantity: 1,
+          price: 14.00,
+          value: 14.00,
+          currency: 'USD'
+        });
+        console.log('✅ TikTok Pixel: Purchase tracked');
+      }
+      
+      // Save session to prevent duplicate tracking
+      trackedSessions.push(sessionId);
+      localStorage.setItem('tracked_purchases', JSON.stringify(trackedSessions));
+    }
+    
+    // Save that user claimed downloads
+    const claimedSessions = JSON.parse(localStorage.getItem('claimed_downloads') || '[]');
+    if (sessionId && !claimedSessions.includes(sessionId)) {
+      claimedSessions.push(sessionId);
+      localStorage.setItem('claimed_downloads', JSON.stringify(claimedSessions));
+    }
+    
+    // Show downloads
+    setShowDownloads(true);
+  };
 
   if (isLoading) {
     return (
@@ -109,6 +136,51 @@ const SuccessPage = () => {
     );
   }
 
+  // Step 1: Show claim button (before tracking)
+  if (!showDownloads) {
+    return (
+      <div className="success-page" dir="rtl">
+        <div className="success-wrapper">
+          {/* Header Section */}
+          <div className="success-header">
+            <div className="success-checkmark">
+              <svg viewBox="0 0 52 52">
+                <circle cx="26" cy="26" r="25" fill="none"/>
+                <path fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+              </svg>
+            </div>
+            <h1>🎉 تم الدفع بنجاح!</h1>
+            <p>شكراً لشرائك! اضغط على الزر أدناه للحصول على منتجاتك</p>
+          </div>
+
+          {/* Claim Button - This triggers the tracking */}
+          <div className="claim-section">
+            <button onClick={handleClaimProducts} className="claim-button">
+              <span className="claim-icon">🎁</span>
+              <span className="claim-text">اضغط هنا للحصول على منتجاتك</span>
+              <span className="claim-arrow">→</span>
+            </button>
+            <p className="claim-hint">سيتم تحويلك لصفحة التحميلات فوراً</p>
+          </div>
+
+          {/* Trust Badges */}
+          <div className="trust-section">
+            <div className="trust-badge">
+              <span>✓</span> دفع آمن ومضمون
+            </div>
+            <div className="trust-badge">
+              <span>✓</span> تحميل فوري
+            </div>
+            <div className="trust-badge">
+              <span>✓</span> دعم على مدار الساعة
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Step 2: Show downloads (after clicking claim button)
   return (
     <div className="success-page" dir="rtl">
       <div className="success-wrapper">
@@ -120,8 +192,8 @@ const SuccessPage = () => {
               <path fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
             </svg>
           </div>
-          <h1>🎉 تم الدفع بنجاح!</h1>
-          <p>شكراً لشرائك! يمكنك تحميل جميع الملفات الآن</p>
+          <h1>🎉 منتجاتك جاهزة!</h1>
+          <p>يمكنك تحميل جميع الملفات الآن</p>
         </div>
 
         {/* Downloads Section */}
