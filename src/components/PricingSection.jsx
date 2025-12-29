@@ -51,7 +51,7 @@ const PricingSection = () => {
           </div>
           
           <div className="pricing-current-price">
-            14 دولار
+            10 دولار
           </div>
           
           <div className="pricing-offer-text">اليوم فقط — عرض خاص لمدة ٢٤ ساعة</div>

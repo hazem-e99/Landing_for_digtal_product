@@ -82,7 +82,7 @@ const SuccessPage = () => {
       if (typeof window.fbq === 'function') {
         window.fbq('track', 'Purchase', {
           currency: 'USD',
-          value: 14.00,
+          value: 10.00,
           content_type: 'product',
           content_name: 'Digital Products Bundle'
         }, { eventID: currentSessionId }); // Add Event ID for deduplication
@@ -96,8 +96,8 @@ const SuccessPage = () => {
           content_id: 'digital_bundle',
           content_name: 'Digital Products Bundle',
           quantity: 1,
-          price: 14.00,
-          value: 14.00,
+          price: 10.00,
+          value: 10.00,
           currency: 'USD',
           event_id: currentSessionId // Add Event ID for deduplication
         });

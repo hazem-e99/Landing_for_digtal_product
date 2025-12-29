@@ -8,7 +8,7 @@ export const trackInitiateCheckout = () => {
   if (typeof window.fbq === 'function') {
     window.fbq('track', 'InitiateCheckout', {
       currency: 'USD',
-      value: 14.00,
+      value: 10.00,
       content_type: 'product',
       content_name: 'Digital Products Bundle'
     });
@@ -22,8 +22,8 @@ export const trackInitiateCheckout = () => {
       content_id: 'digital_bundle',
       content_name: 'Digital Products Bundle',
       quantity: 1,
-      price: 14.00,
-      value: 14.00,
+      price: 10.00,
+      value: 10.00,
       currency: 'USD'
     });
     console.log('✅ TikTok Pixel: InitiateCheckout tracked');
@@ -37,7 +37,7 @@ export const trackAddToCart = () => {
   if (typeof window.fbq === 'function') {
     window.fbq('track', 'AddToCart', {
       currency: 'USD',
-      value: 14.00,
+      value: 10.00,
       content_type: 'product',
       content_name: 'Digital Products Bundle'
     });
@@ -47,7 +47,7 @@ export const trackAddToCart = () => {
     window.ttq.track('AddToCart', {
       content_type: 'product',
       content_id: 'digital_bundle',
-      value: 14.00,
+      value: 10.00,
       currency: 'USD'
     });
   }
@@ -60,7 +60,7 @@ export const trackViewContent = () => {
   if (typeof window.fbq === 'function') {
     window.fbq('track', 'ViewContent', {
       currency: 'USD',
-      value: 14.00,
+      value: 10.00,
       content_type: 'product',
       content_name: 'Digital Products Bundle'
     });
@@ -70,7 +70,7 @@ export const trackViewContent = () => {
     window.ttq.track('ViewContent', {
       content_type: 'product',
       content_id: 'digital_bundle',
-      value: 14.00,
+      value: 10.00,
       currency: 'USD'
     });
   }
