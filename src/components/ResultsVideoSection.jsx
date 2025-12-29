@@ -1,5 +1,6 @@
 import './ResultsVideoSection.css';
 import { trackInitiateCheckout } from '../utils/tracking';
+import { initiateCheckout } from '../services/api';
 
 const ResultsVideoSection = () => {
   return (
@@ -37,10 +38,16 @@ const ResultsVideoSection = () => {
 
         {/* CTA Button */}
         <div className="results-video-cta">
-          <a href="https://buy.stripe.com/eVqaEY0hQ8aF3KXcY8dAk29" target="_blank" rel="noopener noreferrer" className="results-cta-button" onClick={trackInitiateCheckout}>
+          <button 
+            className="results-cta-button" 
+            onClick={() => {
+              trackInitiateCheckout();
+              initiateCheckout();
+            }}
+          >
             <span className="cta-icon">💎</span>
             ابدأ مشروعك الرقمي الآن
-          </a>
+          </button>
         </div>
       </div>
     </section>

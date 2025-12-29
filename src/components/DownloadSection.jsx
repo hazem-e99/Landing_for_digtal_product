@@ -1,5 +1,6 @@
 import './DownloadSection.css';
 import { trackInitiateCheckout } from '../utils/tracking';
+import { initiateCheckout } from '../services/api';
 
 const DownloadSection = () => {
   return (
@@ -61,9 +62,15 @@ const DownloadSection = () => {
           </p>
 
           {/* CTA Button */}
-          <a href="https://buy.stripe.com/eVqaEY0hQ8aF3KXcY8dAk29" target="_blank" rel="noopener noreferrer" className="download-cta-button" onClick={trackInitiateCheckout}>
+          <button 
+            className="download-cta-button" 
+            onClick={() => {
+              trackInitiateCheckout();
+              initiateCheckout();
+            }}
+          >
             انتقل إلى صفحة التحميلات
-          </a>
+          </button>
         </div>
       </div>
     </section>

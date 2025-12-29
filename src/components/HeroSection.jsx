@@ -1,4 +1,5 @@
 import './HeroSection.css';
+import { initiateCheckout } from '../services/api';
 
 const HeroSection = () => {
   const features = [
@@ -35,10 +36,10 @@ const HeroSection = () => {
         </p>
 
         {/* CTA Button */}
-        <a href="https://buy.stripe.com/eVqaEY0hQ8aF3KXcY8dAk29" target="_blank" rel="noopener noreferrer" className="hero-cta">
+        <button className="hero-cta" onClick={initiateCheckout}>
           <span className="hero-cta-icon">🔥</span>
           <span className="hero-cta-text">احصل على الحزمة الآن</span>
-        </a>
+        </button>
 
         {/* Features */}
         <div className="hero-features">

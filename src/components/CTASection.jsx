@@ -1,5 +1,6 @@
 import './CTASection.css';
 import { trackInitiateCheckout } from '../utils/tracking';
+import { initiateCheckout } from '../services/api';
 
 const CTASection = () => {
   return (
@@ -24,10 +25,16 @@ const CTASection = () => {
 
         {/* CTA Button */}
         <div className="cta-button-wrapper">
-          <a href="https://buy.stripe.com/eVqaEY0hQ8aF3KXcY8dAk29" target="_blank" rel="noopener noreferrer" className="cta-main-button" onClick={trackInitiateCheckout}>
+          <button 
+            className="cta-main-button" 
+            onClick={() => {
+              trackInitiateCheckout();
+              initiateCheckout();
+            }}
+          >
             <span className="button-fires">🔥🔥</span>
             احصل على الحزمة الآن
-          </a>
+          </button>
         </div>
       </div>
     </section>

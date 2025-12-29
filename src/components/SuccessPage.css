@@ -102,6 +102,61 @@
   box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.5);
 }
 
+.btn-secondary {
+  display: inline-flex;
+  padding: 1rem 2rem;
+  margin-top: 1rem;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin-left: 1rem;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+
+/* Loading hint */
+.loading-hint {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+  margin-top: -0.5rem;
+}
+
+/* Verified Badge */
+.verified-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: rgba(74, 222, 128, 0.15);
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  border-radius: 50px;
+  color: #4ade80;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.verified-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #4ade80;
+  color: #0f172a;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
 /* Header Section */
 .success-header {
   text-align: center;

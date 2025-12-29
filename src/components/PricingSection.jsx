@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import './PricingSection.css';
 import { trackInitiateCheckout } from '../utils/tracking';
-
-// رابط Stripe Payment Link
-const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/eVqaEY0hQ8aF3KXcY8dAk29";
+import { initiateCheckout } from '../services/api';
 
 const PricingSection = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -58,10 +56,16 @@ const PricingSection = () => {
           
           <div className="pricing-offer-text">اليوم فقط — عرض خاص لمدة ٢٤ ساعة</div>
           
-          <a href={STRIPE_PAYMENT_LINK} target="_blank" rel="noopener noreferrer" className="pricing-cta-button" onClick={trackInitiateCheckout}>
+          <button 
+            className="pricing-cta-button" 
+            onClick={() => {
+              trackInitiateCheckout();
+              initiateCheckout();
+            }}
+          >
             <span className="pricing-cta-icon">🔥</span>
             احصل على الحزمة الآن
-          </a>
+          </button>
           
           <div className="pricing-payment-info">
             تحميل رقمي فوري • دفعة واحدة

@@ -1,74 +1,83 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { verifyPaymentSession } from '../services/api';
 import './SuccessPage.css';
-
-// روابط تحميل الملفات الثلاثة
-const DOWNLOAD_FILES = [
-  {
-    name: "35 مليون منتج رقمي",
-    filename: "35-Million-Products.pdf.pdf-mayswj.pdf",
-    icon: "📦",
-    description: "مجموعة ضخمة من المنتجات الرقمية",
-    color: "green"
-  },
-  {
-    name: "مليون منتج PDF",
-    filename: "million-digital-products-pdf.pdf-bqs5yz.pdf",
-    icon: "📚",
-    description: "كتب ومستندات PDF جاهزة",
-    color: "purple"
-  },
-  {
-    name: "الكورسات الهدية",
-    filename: "الكورسات-الهدية-فقط.pdf.pdf-hu51he.pdf",
-    icon: "🎁",
-    description: "كورسات تعليمية مجانية",
-    color: "pink"
-  }
-];
 
 const SuccessPage = () => {
   const [searchParams] = useSearchParams();
-  const [isValid, setIsValid] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [showDownloads, setShowDownloads] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
   const [sessionId, setSessionId] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
+  const hasTracked = useRef(false); // Prevent double tracking
 
   useEffect(() => {
-    const urlSessionId = searchParams.get('session_id');
-    
-    if (urlSessionId) {
-      setIsValid(true);
-      setSessionId(urlSessionId);
-      localStorage.setItem('payment_verified', urlSessionId);
+    const verifyPayment = async () => {
+      const urlSessionId = searchParams.get('session_id');
       
-      // Check if user already claimed downloads (show downloads directly)
-      const claimedSessions = JSON.parse(localStorage.getItem('claimed_downloads') || '[]');
-      if (claimedSessions.includes(urlSessionId)) {
-        setShowDownloads(true);
-      }
-    } else {
-      const savedSession = localStorage.getItem('payment_verified');
-      if (savedSession) {
-        setIsValid(true);
-        setSessionId(savedSession);
-        // Check if already claimed
-        const claimedSessions = JSON.parse(localStorage.getItem('claimed_downloads') || '[]');
-        if (claimedSessions.includes(savedSession)) {
-          setShowDownloads(true);
+      if (!urlSessionId) {
+        // Check if user has a previously verified session
+        const savedSession = localStorage.getItem('verified_payment_session');
+        if (savedSession) {
+          const savedData = JSON.parse(savedSession);
+          setSessionId(savedData.sessionId);
+          setProducts(savedData.products || []);
+          setIsVerified(true);
+        } else {
+          setErrorMessage('لم يتم العثور على معرف الجلسة. يرجى إتمام عملية الدفع أولاً.');
         }
+        setIsLoading(false);
+        return;
       }
-    }
-    setIsLoading(false);
+
+      setSessionId(urlSessionId);
+
+      try {
+        // Verify the payment with the backend
+        const result = await verifyPaymentSession(urlSessionId);
+        
+        if (result.paid) {
+          console.log('✅ Payment verified successfully!');
+          setIsVerified(true);
+          setProducts(result.products || []);
+          
+          // Save verified session to localStorage
+          localStorage.setItem('verified_payment_session', JSON.stringify({
+            sessionId: urlSessionId,
+            products: result.products,
+            verifiedAt: new Date().toISOString()
+          }));
+          
+          // Track the purchase immediately after verification
+          trackPurchase(urlSessionId);
+        } else {
+          console.log('❌ Payment not verified:', result);
+          setErrorMessage('لم يتم التحقق من الدفع. يرجى المحاولة مرة أخرى أو التواصل معنا.');
+        }
+      } catch (error) {
+        console.error('Error verifying payment:', error);
+        setErrorMessage('حدث خطأ أثناء التحقق من الدفع. يرجى المحاولة مرة أخرى.');
+      }
+      
+      setIsLoading(false);
+    };
+
+    verifyPayment();
   }, [searchParams]);
 
-  // Function to handle claim button click - THIS IS WHERE TRACKING HAPPENS
-  const handleClaimProducts = () => {
-    // Check if we already tracked this purchase to avoid duplicates
-    const trackedSessions = JSON.parse(localStorage.getItem('tracked_purchases') || '[]');
-    const alreadyTracked = sessionId && trackedSessions.includes(sessionId);
+  // Function to track purchase - called automatically after verification
+  const trackPurchase = (currentSessionId) => {
+    // Prevent double tracking
+    if (hasTracked.current) return;
     
-    if (!alreadyTracked && sessionId) {
+    // Check if we already tracked this purchase
+    const trackedSessions = JSON.parse(localStorage.getItem('tracked_purchases') || '[]');
+    const alreadyTracked = currentSessionId && trackedSessions.includes(currentSessionId);
+    
+    if (!alreadyTracked && currentSessionId) {
+      hasTracked.current = true;
+      
       // Track Purchase event with Meta Pixel
       if (typeof window.fbq === 'function') {
         window.fbq('track', 'Purchase', {
@@ -95,92 +104,44 @@ const SuccessPage = () => {
       }
       
       // Save session to prevent duplicate tracking
-      trackedSessions.push(sessionId);
+      trackedSessions.push(currentSessionId);
       localStorage.setItem('tracked_purchases', JSON.stringify(trackedSessions));
     }
-    
-    // Save that user claimed downloads
-    const claimedSessions = JSON.parse(localStorage.getItem('claimed_downloads') || '[]');
-    if (sessionId && !claimedSessions.includes(sessionId)) {
-      claimedSessions.push(sessionId);
-      localStorage.setItem('claimed_downloads', JSON.stringify(claimedSessions));
-    }
-    
-    // Show downloads
-    setShowDownloads(true);
   };
 
+  // Loading state
   if (isLoading) {
     return (
       <div className="success-page" dir="rtl">
         <div className="success-loading">
           <div className="loading-spinner"></div>
-          <p>جاري التحقق...</p>
+          <p>جاري التحقق من الدفع...</p>
+          <p className="loading-hint">يرجى الانتظار بينما نتحقق من عملية الدفع</p>
         </div>
       </div>
     );
   }
 
-  if (!isValid) {
+  // Error / Not verified state
+  if (!isVerified) {
     return (
       <div className="success-page" dir="rtl">
         <div className="success-container unauthorized">
           <div className="error-icon">⚠️</div>
           <h1>غير مصرح</h1>
-          <p>يجب إتمام عملية الدفع أولاً للوصول لهذه الصفحة.</p>
+          <p>{errorMessage || 'يجب إتمام عملية الدفع أولاً للوصول لهذه الصفحة.'}</p>
           <a href="/#pricing" className="btn-primary">
             اذهب للشراء
+          </a>
+          <a href="https://wa.me/201065453966" target="_blank" rel="noopener noreferrer" className="btn-secondary">
+            تواصل مع الدعم
           </a>
         </div>
       </div>
     );
   }
 
-  // Step 1: Show claim button (before tracking)
-  if (!showDownloads) {
-    return (
-      <div className="success-page" dir="rtl">
-        <div className="success-wrapper">
-          {/* Header Section */}
-          <div className="success-header">
-            <div className="success-checkmark">
-              <svg viewBox="0 0 52 52">
-                <circle cx="26" cy="26" r="25" fill="none"/>
-                <path fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-              </svg>
-            </div>
-            <h1>🎉 تم الدفع بنجاح!</h1>
-            <p>شكراً لشرائك! اضغط على الزر أدناه للحصول على منتجاتك</p>
-          </div>
-
-          {/* Claim Button - This triggers the tracking */}
-          <div className="claim-section">
-            <button onClick={handleClaimProducts} className="claim-button">
-              <span className="claim-icon">🎁</span>
-              <span className="claim-text">اضغط هنا للحصول على منتجاتك</span>
-              <span className="claim-arrow">→</span>
-            </button>
-            <p className="claim-hint">سيتم تحويلك لصفحة التحميلات فوراً</p>
-          </div>
-
-          {/* Trust Badges */}
-          <div className="trust-section">
-            <div className="trust-badge">
-              <span>✓</span> دفع آمن ومضمون
-            </div>
-            <div className="trust-badge">
-              <span>✓</span> تحميل فوري
-            </div>
-            <div className="trust-badge">
-              <span>✓</span> دعم على مدار الساعة
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // Step 2: Show downloads (after clicking claim button)
+  // Success - Show downloads directly
   return (
     <div className="success-page" dir="rtl">
       <div className="success-wrapper">
@@ -192,8 +153,12 @@ const SuccessPage = () => {
               <path fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
             </svg>
           </div>
-          <h1>🎉 منتجاتك جاهزة!</h1>
-          <p>يمكنك تحميل جميع الملفات الآن</p>
+          <h1>🎉 تم الدفع بنجاح!</h1>
+          <p>شكراً لشرائك! منتجاتك جاهزة للتحميل</p>
+          <div className="verified-badge">
+            <span className="verified-icon">✓</span>
+            <span>تم التحقق من الدفع</span>
+          </div>
         </div>
 
         {/* Downloads Section */}
@@ -204,25 +169,67 @@ const SuccessPage = () => {
           </h2>
           
           <div className="downloads-grid">
-            {DOWNLOAD_FILES.map((file, index) => (
-              <a 
-                key={index}
-                href={`/products/${file.filename}`}
-                download={file.filename}
-                className={`download-card-success ${file.color}`}
-              >
-                <span className="card-icon">{file.icon}</span>
-                <span className="card-title">{file.name}</span>
-                <div className="card-download-btn">
-                  <span>تحميل</span>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                    <polyline points="7 10 12 15 17 10"/>
-                    <line x1="12" y1="15" x2="12" y2="3"/>
-                  </svg>
-                </div>
-              </a>
-            ))}
+            {products.length > 0 ? (
+              products.map((product, index) => (
+                <a 
+                  key={index}
+                  href={product.url}
+                  download
+                  className={`download-card-success ${product.color}`}
+                >
+                  <span className="card-icon">{product.icon}</span>
+                  <span className="card-title">{product.name}</span>
+                  <div className="card-download-btn">
+                    <span>تحميل</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                      <polyline points="7 10 12 15 17 10"/>
+                      <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                  </div>
+                </a>
+              ))
+            ) : (
+              // Fallback products if API doesn't return them
+              <>
+                <a href="/products/35-Million-Products.pdf.pdf-mayswj.pdf" download className="download-card-success green">
+                  <span className="card-icon">📦</span>
+                  <span className="card-title">35 مليون منتج رقمي</span>
+                  <div className="card-download-btn">
+                    <span>تحميل</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                      <polyline points="7 10 12 15 17 10"/>
+                      <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                  </div>
+                </a>
+                <a href="/products/million-digital-products-pdf.pdf-bqs5yz.pdf" download className="download-card-success purple">
+                  <span className="card-icon">📚</span>
+                  <span className="card-title">مليون منتج PDF</span>
+                  <div className="card-download-btn">
+                    <span>تحميل</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                      <polyline points="7 10 12 15 17 10"/>
+                      <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                  </div>
+                </a>
+                <a href="/products/الكورسات-الهدية-فقط.pdf.pdf-hu51he.pdf" download className="download-card-success pink">
+                  <span className="card-icon">🎁</span>
+                  <span className="card-title">الكورسات الهدية</span>
+                  <div className="card-download-btn">
+                    <span>تحميل</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                      <polyline points="7 10 12 15 17 10"/>
+                      <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                  </div>
+                </a>
+              </>
+            )}
           </div>
         </div>
 
