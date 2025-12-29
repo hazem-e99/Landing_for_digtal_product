@@ -85,7 +85,7 @@ const SuccessPage = () => {
           value: 14.00,
           content_type: 'product',
           content_name: 'Digital Products Bundle'
-        });
+        }, { eventID: currentSessionId }); // Add Event ID for deduplication
         console.log('✅ Meta Pixel: Purchase tracked');
       }
       
@@ -98,7 +98,8 @@ const SuccessPage = () => {
           quantity: 1,
           price: 14.00,
           value: 14.00,
-          currency: 'USD'
+          currency: 'USD',
+          event_id: currentSessionId // Add Event ID for deduplication
         });
         console.log('✅ TikTok Pixel: Purchase tracked');
       }
