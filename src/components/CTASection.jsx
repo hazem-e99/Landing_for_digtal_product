@@ -9,7 +9,7 @@ const CTASection = () => {
         {/* Main Heading */}
         <h2 className="cta-heading">
           <span className="cta-rocket">🚀</span>
-          فقط بـ <span className="cta-gradient">14 دولار</span> تغيّر مستقبلك!
+          فقط بـ <span className="cta-gradient">10 دولار</span> تغيّر مستقبلك!
         </h2>
 
         {/* Description */}
