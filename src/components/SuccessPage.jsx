@@ -77,7 +77,9 @@ const SuccessPage = () => {
     
     if (!alreadyTracked && currentSessionId) {
       hasTracked.current = true;
-      
+      // Add event ID for deduplication - clean it first
+      const cleanEventID = currentSessionId.trim();
+
       // Track Purchase event with Meta Pixel
       if (typeof window.fbq === 'function') {
         window.fbq('track', 'Purchase', {
@@ -85,8 +87,8 @@ const SuccessPage = () => {
           value: 10.00,
           content_type: 'product',
           content_name: 'Digital Products Bundle'
-        }, { eventID: currentSessionId }); // Add Event ID for deduplication
-        console.log('✅ Meta Pixel: Purchase tracked');
+        }, { eventID: cleanEventID }); 
+        console.log('✅ Meta Pixel: Purchase tracked', cleanEventID);
       }
       
       // Track Purchase event with TikTok Pixel
@@ -99,7 +101,7 @@ const SuccessPage = () => {
           price: 10.00,
           value: 10.00,
           currency: 'USD',
-          event_id: currentSessionId // Add Event ID for deduplication
+          event_id: cleanEventID 
         });
         console.log('✅ TikTok Pixel: Purchase tracked');
       }
