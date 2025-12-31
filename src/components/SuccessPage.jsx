@@ -67,49 +67,13 @@ const SuccessPage = () => {
   }, [searchParams]);
 
   // Function to track purchase - called automatically after verification
+  // ⚠️ CLIENT-SIDE TRACKING DISABLED
+  // All tracking now happens 100% server-side via Stripe Webhook
+  // This eliminates any possibility of duplicate events
   const trackPurchase = (currentSessionId) => {
-    // Prevent double tracking
-    if (hasTracked.current) return;
-    
-    // Check if we already tracked this purchase
-    const trackedSessions = JSON.parse(localStorage.getItem('tracked_purchases') || '[]');
-    const alreadyTracked = currentSessionId && trackedSessions.includes(currentSessionId);
-    
-    if (!alreadyTracked && currentSessionId) {
-      hasTracked.current = true;
-      // Add event ID for deduplication - clean it first
-      const cleanEventID = currentSessionId.trim();
-
-      // Track Purchase event with Meta Pixel
-      if (typeof window.fbq === 'function') {
-        window.fbq('track', 'Purchase', {
-          currency: 'USD',
-          value: 10.00,
-          content_type: 'product',
-          content_name: 'Digital Products Bundle'
-        }, { eventID: cleanEventID }); 
-        console.log('✅ Meta Pixel: Purchase tracked', cleanEventID);
-      }
-      
-      // Track Purchase event with TikTok Pixel
-      if (typeof window.ttq !== 'undefined') {
-        window.ttq.track('CompletePayment', {
-          content_type: 'product',
-          content_id: 'digital_bundle',
-          content_name: 'Digital Products Bundle',
-          quantity: 1,
-          price: 10.00,
-          value: 10.00,
-          currency: 'USD',
-          event_id: cleanEventID 
-        });
-        console.log('✅ TikTok Pixel: Purchase tracked');
-      }
-      
-      // Save session to prevent duplicate tracking
-      trackedSessions.push(currentSessionId);
-      localStorage.setItem('tracked_purchases', JSON.stringify(trackedSessions));
-    }
+    console.log('ℹ️ Client-side tracking disabled - all tracking handled by server');
+    console.log('   Session ID:', currentSessionId);
+    console.log('   Server will track this purchase via Stripe webhook');
   };
 
   // Loading state
